@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Wesley Bliss",
+      "authorEmail": "wesley.bliss@gmail.com",
+      "authorUrl": "TODO"
+    }
+  }
+}
