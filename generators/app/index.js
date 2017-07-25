@@ -5,8 +5,12 @@ const Generator = require('yeoman-generator')
 const chalk = require('chalk')
 const yosay = require('yosay')
 
-const generatorName = 'Kotlin Android Starter'
-const generatorTitle = chalk.red(generatorName)
+const generatorTitle =
+    chalk.yellow('Kot') +
+    chalk.blue('lin') + ' ' +
+    chalk.green('Android') + ' ' +
+    chalk.white('Starter')
+
 const promptsDir = path.resolve(__dirname, 'prompts')
 
 
@@ -29,15 +33,19 @@ module.exports = class extends Generator {
     
     writing() {
         
-        this.fs.copy(
+        this.log(JSON.stringify(this.props, null, '    '))
+        
+        /*this.fs.copy(
             this.templatePath('dummyfile.txt'),
             this.destinationPath('dummyfile.txt')
-        )
+        )*/
         
     }
     
     install() {
-        this.installDependencies()
+        
+        //this.installDependencies()
+        
     }
     
 }

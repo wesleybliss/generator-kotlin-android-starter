@@ -1,7 +1,7 @@
 
 module.exports = {
-    type: 'confirm',
-    name: 'someAnswer',
-    message: 'Would you like to enable this option?',
-    default: true
+    type: 'input',
+    name: 'appName',
+    message: 'Cannonical name for this app?',
+    default: 'ACME-Android'
 }

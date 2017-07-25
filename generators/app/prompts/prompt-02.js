@@ -1,7 +1,7 @@
 
 module.exports = {
-    type: 'confirm',
-    name: 'someAnswer',
-    message: 'Do you like green eggs and ham?',
-    default: true
+    type: 'input',
+    name: 'appNamespace',
+    message: 'Project namespace? (e.g. com.acme.myapp)',
+    default: 'com.acme.myapp'
 }
