@@ -5,7 +5,6 @@
  * TODO
  *     - cleanup & clarity - promises are a bit of a mess
  *     - option to run gradle at the end (may need chmod +x)
- *     - have the readme update too
  *     
  ****************************************************************/
 
@@ -51,7 +50,7 @@ const replaceAndRename = namespace => {
         replacement: namespace.replace(/\//g, '.'),
         paths: [projectRoot],
         recursive: true,
-        silent: true,
+        silent: true
     })
     
     const pr = dir => path.resolve(projectRoot, dir)
@@ -112,6 +111,13 @@ const replaceAndRename = namespace => {
             ))
             .then(() => mkdirp(targetAndroidTestNs))
             .then(() => mv(androidTestSrcTemp, `${targetAndroidTestNs}/`))
+            .then(() => new Promise((resolve, reject) => {
+                let readme = path.resolve(projectRoot, 'README.md')
+                fs.writeFile(readme, '> ' + namespace.replace(/\//g, '.'), err => {
+                    if (err) reject(err)
+                    else resolve()
+                })
+            }))
         
     }
     
