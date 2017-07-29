@@ -1,9 +1,20 @@
-# generator-kotlin-android-starter [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# Kotlin Android Starter
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Android Kotlin starter app
+
 
 ## WIP
 
-This is very pre-alpha, and shouldn't be used yet.
+~~This is very pre-alpha, and shouldn't be used yet.~~
+The codebase is a bit of a mess, but the generator works, and is a decent MVP version.
+
+
+## TODO
+
+1. Document features
+2. Cleanup codebase
+3. CI
+
 
 ## Installation
 
@@ -20,6 +31,7 @@ Then generate your new project:
 yo kotlin-android-starter
 ```
 
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
@@ -27,9 +39,10 @@ yo kotlin-android-starter
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
+
 ## License
 
-MIT © [Wesley Bliss](TODO)
+MIT © Wesley Bliss [GitHub](https://github.com/wesleybliss) [Twitter](https://twitter.com/wesleybliss)
 
 
 [npm-image]: https://badge.fury.io/js/generator-kotlin-android-starter.svg
