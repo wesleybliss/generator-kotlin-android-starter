@@ -4,7 +4,6 @@
  *
  * TODO
  *     - cleanup & clarity - promises are a bit of a mess
- *     - option to run gradle at the end (may need chmod +x)
  *     
  ****************************************************************/
 
@@ -17,6 +16,7 @@ const mkdirp = promisify(require('mkdirp'))
 const clone = promisify(require('git-clone'))
 const ncp = promisify(require('ncp').ncp)
 const replace = require('replace')
+const spawn = require('child_process').spawn
 const chalk = require('chalk')
 const Generator = require('yeoman-generator')
 const yosay = require('yosay')
@@ -134,6 +134,13 @@ const initProject = generator => {
         sourceRoot: generator.sourceRoot()
     }, null, '    '))
     
+    const childLog = (data, error) => {
+        if (data && data.toString().trim().length > 0) {
+            data = data.toString()
+            console.log(error ? chalk.red(data) : data)
+        }
+    }
+    
     return Promise.resolve(fs.readdirSync(projectRoot))
         .then(files => {
             return Promise.all(files.map(
@@ -145,6 +152,25 @@ const initProject = generator => {
             catch (e) {}
         })
         .then(() => replaceAndRename(namespace))
+        .then(() => new Promise((resolve, reject) => {
+            if (generator.props.runGradle) {
+                let child = spawn(
+                    path.resolve(projectRoot, 'gradlew'),
+                    ['assembleDebug'], { cwd: projectRoot }
+                )
+                child.stdout.on('data', data => { childLog(data) })
+                child.stderr.on('data', data => { childLog(data, true) })
+                child.on('close', code => {
+                    console.log('finished with code: ' + code)
+                    if (code && parseInt(code) === 0) resolve()
+                    else reject(code)
+                })
+            }
+            else {
+                resolve()
+            }
+                        
+        }))
         .catch(err => console.error(err))
     
 }
