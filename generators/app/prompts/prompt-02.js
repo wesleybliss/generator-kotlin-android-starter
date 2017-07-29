@@ -1,7 +1,7 @@
 
 module.exports = {
     type: 'input',
-    name: 'appNamespace',
-    message: 'Project namespace? (e.g. com.acme.myapp)',
-    default: 'com.acme.myapp'
+    name: 'appName',
+    message: 'Cannonical name for this app?',
+    default: 'ACME-Android'
 }

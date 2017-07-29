@@ -1,7 +1,7 @@
 
 module.exports = {
-    type: 'input',
-    name: 'appName',
-    message: 'Cannonical name for this app?',
-    default: 'ACME-Android'
+    type: 'confirm',
+    name: 'updateRepo',
+    message: 'Update the test project from the repository?',
+    default: false
 }
