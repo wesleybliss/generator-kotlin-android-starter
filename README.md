@@ -14,6 +14,7 @@ The codebase is a bit of a mess, but the generator works, and is a decent MVP ve
 1. Document features
 2. Cleanup codebase
 3. CI
+4. Add a check for `ANDROID_HOME` env var before running Gradle
 
 
 ## Installation
