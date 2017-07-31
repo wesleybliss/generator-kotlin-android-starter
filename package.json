@@ -1,12 +1,12 @@
 {
   "name": "generator-kotlin-android-starter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Android Kotlin starter app",
-  "homepage": "TODO",
+  "homepage": "https://github.com/wesleybliss/generator-kotlin-android-starter",
   "author": {
     "name": "Wesley Bliss",
     "email": "wesley.bliss@gmail.com",
-    "url": "TODO"
+    "url": "https://github.com/wesleybliss"
   },
   "files": [
     "generators"
