@@ -29,8 +29,11 @@ const generatorTitle =
 
 const promptsDir = path.resolve(__dirname, 'prompts')
 const repoUrl = 'https://github.com/wesleybliss/kotlin-android-starter.git'
-const projectRoot = process.cwd()
 const demoPackage = 'com.kotlinandroidstarter.app'
+
+// Mutable, in case project subdir needs to be appended
+// so we don't accidentally nuke the path they're in
+let projectRoot = process.cwd()
 
 const cloneOpts = {
     shallow: true,
@@ -141,7 +144,15 @@ const initProject = generator => {
         }
     }
     
-    return Promise.resolve(fs.readdirSync(projectRoot))
+    /////////////////////////////////////////////////////////
+    // IMPORTANT: Don't delete stuff in the projectRoot if //
+    // the CWD is not in the subdirectory of the project!  //
+    /////////////////////////////////////////////////////////
+    if (!projectRoot.endsWith(generator.props.appName))
+        projectRoot = path.join(projectRoot, generator.props.appName)
+    
+    return mkdirp(projectRoot)
+        .then(() => Promise.resolve(fs.readdirSync(projectRoot)))
         .then(files => {
             return Promise.all(files.map(
                 f => rimraf(path.resolve(projectRoot, f))))
