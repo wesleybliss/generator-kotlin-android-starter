@@ -35,7 +35,7 @@
     "mkdirp": "^0.5.1",
     "mv": "^2.1.1",
     "ncp": "^2.0.0",
-    "replace": "^0.3.0",
+    "replace": "git+ssh://git@github.com/wesleybliss/replace.git",
     "rimraf": "^2.6.2",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
