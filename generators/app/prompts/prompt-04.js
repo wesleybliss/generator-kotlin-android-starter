@@ -1,7 +1,7 @@
 
 module.exports = {
     type: 'confirm',
-    name: 'runGradle',
-    message: 'Run Gradle when finished?',
+    name: 'useFabric',
+    message: 'Use Fabric?',
     default: false
 }

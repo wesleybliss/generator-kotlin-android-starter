@@ -20,26 +20,21 @@ const spawn = require('child_process').spawn
 const chalk = require('chalk')
 const Generator = require('yeoman-generator')
 const yosay = require('yosay')
+const config = require('./config')
 
-const generatorTitle =
-    chalk.yellow('Kot') +
-    chalk.blue('lin') + ' ' +
-    chalk.green('Android') + ' ' +
-    chalk.white('Starter')
+const {
+    generatorTitle,
+    promptsDir,
+    repoUrl,
+    demoPackage,
+    cloneOpts
+} = config
 
-const promptsDir = path.resolve(__dirname, 'prompts')
-const repoUrl = 'https://github.com/wesleybliss/kotlin-android-starter.git'
-const demoPackage = 'com.kotlinandroidstarter.app'
+let projectRoot = config.projectRoot
 
-// Mutable, in case project subdir needs to be appended
-// so we don't accidentally nuke the path they're in
-let projectRoot = process.cwd()
-
-const cloneOpts = {
-    shallow: true,
-    checkout: 'master'
-}
-
+const {
+    FABRIC
+} = config.VARS
 
 /**
  * Synchronously Replace necessary strings in files.
@@ -48,11 +43,23 @@ const cloneOpts = {
  */
 const replaceAndRename = namespace => {
     
+    const {
+        useFabric
+    } = generator.props
+    
     replace({
         regex: demoPackage,
         replacement: namespace.replace(/\//g, '.'),
         paths: [projectRoot],
         recursive: true,
+        silent: true
+    })
+    
+    replace({
+        regex: \/\/VAR\:.*\s/g,
+        replacement: useFabric ? 'apply plugin: \'io.fabric\'' : '',
+        paths: [projectRoot],
+        recursive: false,
         silent: true
     })
     
@@ -162,7 +169,7 @@ const initProject = generator => {
             try { rimraf(path.resolve(projectRoot, '.git')) }
             catch (e) {}
         })
-        .then(() => replaceAndRename(namespace))
+        .then(() => replaceAndRename(generator, namespace))
         .then(() => new Promise((resolve, reject) => {
             if (generator.props.runGradle) {
                 let child = spawn(
